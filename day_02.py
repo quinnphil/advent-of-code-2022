@@ -5,40 +5,26 @@ def read_data(path_data):
         rows = rows[0:-1]
     return rows
 
-map_hands = {
-    "A": 1,
-    "B": 2,
-    "C": 3,
-    "X": 1,
-    "Y": 2,
-    "Z": 3
-}
+
+map_hands = {a: (1+((ord(a) + 5) % 10) % 3) for a in list("ABCXYZ")}
 
 
 def score_round(ply, opp):
     points = 0
-    if opp == 3 and ply == 1:
-        points = 6 + ply
-    elif opp == 1 and ply == 3:
-        points = ply
-    elif ply > opp:
-        points = 6 + ply
-    # Draw
-    elif ply == opp:
-        points = 3 + ply
-    # Loss
+    if opp == 3 - ((4-ply) % 3): points = 6 + ply       # Win
+    elif opp % 3 == (ply + 1) % 3: points = 0 + ply     # Lose
     else:
-        points = 0 + ply
+        points = 3 + ply                                # Draw
+
     return points
+
 
 def play_part1(rounds):
     score = 0
     for r in rounds:
         opp = map_hands[r[0]]
         ply = map_hands[r[1]]
-
         score += score_round(ply, opp)
-
     return score
 
 
@@ -47,32 +33,19 @@ def play_part2(rounds):
     for r in rounds:
         ply = -1
         opp = map_hands[r[0]]
-        res = r[1]
-
-        # Draw
-        if res == "Y":
-            ply = opp
-        # Lose
-        elif res == "X":
-            ply = opp - 1
-            if ply == 0:
-                ply = 3
-        # Win
-        elif res == "Z":
-            ply = (opp % 3) + 1
-
-        points = score_round(ply, opp)
-
-        score += points
-
+        match r[1]:
+            case "Y": ply = opp                 # Draw
+            case "X": ply = 3 - (4 - opp) % 3   # Lose
+            case "Z": ply = (opp % 3) + 1       # Win
+        score += score_round(ply, opp)
     return score
 
 
+rounds = read_data('data/day02_p1.txt')
 
 print("Part 1")
-data = read_data('data/day02_p1.txt')
-print(play_part1(data))
+print(play_part1(rounds))
 
 print("Part 2")
-print(play_part2(data))
+print(play_part2(rounds))
 
