@@ -6,11 +6,11 @@ Solutions for Advent of Code 2022.
 
 ### Links
 
-Advent of Code
+Advent of Code  
 https://adventofcode.com/
 
-Advent of Code - Personal Stats
+Advent of Code - Personal Stats  
 https://adventofcode.com/2022/leaderboard/self
 
-Reddit - Advent of Code
+Reddit - Advent of Code  
 https://old.reddit.com/r/adventofcode/
