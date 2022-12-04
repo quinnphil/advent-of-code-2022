@@ -35,17 +35,15 @@ def get_is_any_overlap(section):
 
     return is_overlap
 
+data = read_data('data/day04_p1.txt')
 
 print("Part 1")
-data = read_data('data/day04_p1.txt')
-# data = read_data('data/day04_p1_test.txt')
 sections = get_sections(data)
 contained = []
 for section in sections:
     contained.append(get_is_contained(section))
 print(sum(contained))
 
-data = read_data('data/day04_p1_test.txt')
 print("\nPart 2")
 contained = []
 for section in sections:
