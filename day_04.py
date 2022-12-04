@@ -10,8 +10,8 @@ def get_sections(lines):
 
         sections.append([[int(h) for h in x.split('-')] for x in line.split(',')])
 
-
     return sections
+
 
 def get_is_contained(section):
     is_contained = False
@@ -25,17 +25,13 @@ def get_is_contained(section):
 
     return is_contained
 
+
 def get_is_any_overlap(section):
     is_overlap = False
     s0 = range(section[0][0], section[0][1] + 1)
     s1 = range(section[1][0], section[1][1] + 1)
 
-    overlap = list(set(s0).intersection(set(s1)))
-    is_overlap = len(overlap) > 0
-    print(section)
-    print(overlap)
-
-    print("\n")
+    is_overlap = len(set(s0).intersection(set(s1))) > 0
 
     return is_overlap
 
@@ -44,7 +40,6 @@ print("Part 1")
 data = read_data('data/day04_p1.txt')
 # data = read_data('data/day04_p1_test.txt')
 sections = get_sections(data)
-print(sections)
 contained = []
 for section in sections:
     contained.append(get_is_contained(section))
@@ -56,5 +51,3 @@ contained = []
 for section in sections:
     contained.append(get_is_any_overlap(section))
 print(sum(contained))
-
-# 729
