@@ -1,12 +1,6 @@
 import re
 from collections import defaultdict
 
-# def read_data(path_data):
-#     with open(path_data) as fh:
-#         data = fh.read().splitlines()
-#
-#     return data
-
 def read_data(path_data):
     with open(path_data) as fh:
         data_state, data_commands = fh.read().split("\n\n")
@@ -19,7 +13,7 @@ def get_state(data_state):
     state = defaultdict(list)
 
     for line in data_state:
-        
+
         if '[' in line:
             for i in range(1, len(line) - 1, 4):
                 if line[i].isalpha():
